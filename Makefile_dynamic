@@ -1,0 +1,18 @@
+target := libnaviavoid.so
+source := $(wildcard *.c)
+objects := $(patsubst %.c, %.o, $(wildcard *.c))
+head := $(wildcard *.h)
+CFLAGS := gcc -c -fPIC
+SHARED := gcc -shared -fPIC -o
+
+$(target):$(objects)
+	$(SHARED) $(target) $(objects)
+
+$(objects):$(source) $(head)
+	$(CFLAGS) $(source)
+
+.PHONY:clean cleanall
+clean:
+	$(RM) *.o
+cleanall:
+	$(RM) $(target) *.o
