@@ -1,0 +1,24 @@
+#makefile
+
+#object = main.o file1.o file2.o
+#
+#edit:$(object)
+#	gcc -o edit $(object)
+#
+#main.o:head.h
+#file1.o:head.h
+#file2.o:head.h
+#
+#.PHONY:clean
+#clean:
+#	-rm edit $(object)
+#	-rm  $(object)
+
+objects := $(patsubst %.c, %.o, $(wildcard *.c))
+
+exe : $(objects)
+	gcc -o exe $(objects)
+
+.PHONY:clean
+clean:
+	$(RM) exe $(objects)
