@@ -1,0 +1,18 @@
+target := libnaviavoid.a
+source := $(wildcard *.c)
+objects := $(patsubst %.c, %.o, $(wildcard *.c))
+head := $(wildcard *.h)
+CFLAGS := gcc -c -lm
+STATIC := ar rcs
+
+$(target):$(objects)
+	$(STATIC) $(target) $(objects)
+
+$(objects):$(source) $(head)
+	$(CFLAGS) $(source)
+
+.PHONY:clean cleanall
+clean:
+	$(RM) *.o
+cleanall:
+	$(RM) $(target) *.o
