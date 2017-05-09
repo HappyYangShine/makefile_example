@@ -1,0 +1,16 @@
+#makefile
+
+target := exe
+objects := $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+source := $(wildcard *.cpp)
+head := $(wildcard *.h)
+
+$(target) : $(objects)
+	g++ -o $(target) $(objects)
+
+$(objects) : $(source) $(head)
+	g++ -c $(source) $(source)
+
+.PHONY:clean
+clean:
+	$(RM) exe $(objects)
